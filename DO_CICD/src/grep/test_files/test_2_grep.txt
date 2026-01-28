@@ -1,0 +1,12 @@
+void PrintMatches(regex_t *preg, char *line) {
+  int offset = 0;
+  regmatch_t match;
+  while (regexec(preg, line + offset, 1, &match, 0) == 0) {
+    printf("%.*s\n", (int)(match.rm_eo - match.rm_so),
+           line + offset + match.rm_so);
+    offset += match.rm_eo;
+    if (match.rm_so == -1) {
+      break;
+    }
+  }
+}

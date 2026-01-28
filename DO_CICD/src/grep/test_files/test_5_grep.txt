@@ -1,0 +1,14 @@
+
+void flag_operation_logic(flag flags, int current, int *preV, int *index,
+                          int *eprint) {
+  if (!(flags.squeeze_blank && *preV == '\n' && current == '\n' && *eprint)) {
+    if (*preV == '\n' && current == '\n')
+      *eprint = 1;
+    else
+      *eprint = 0;
+    if (((flags.number_all && !flags.number_nonblank) ||
+         (flags.number_nonblank && current != '\n')) &&
+        *preV == '\n') {
+      *index += 1;
+      printf("%6d\t", *index);
+    }
